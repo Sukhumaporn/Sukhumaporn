@@ -1,0 +1,16 @@
+name: Notify LINE on Push
+
+on:
+  push:
+    branches:
+      - main  # หรือเปลี่ยนเป็น branch ที่ต้องการให้แจ้งเตือน
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification to LINE
+        run: |
+          curl -X POST https://notify-api.line.me/api/notify \
+          -H "Authorization: Bearer ${{ secrets.LINE_NOTIFY_TOKEN }}" \
+          -d "message=มีการอัปเดตโค้ดใน GitHub Repository!"
